@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="js.js"></script>
+    <link rel="stylesheet" href="css.css">
+    <title>Congress</title>
+</head>
+<body>
+<h1>Congressional Members</h1>
+
+<select id="chamber">
+    <option value="senate">Senate</option>
+    <option value="house">House</option>
+</select>
+<input id="congress" type="text" placeholder="102-115 for House, 80-115 for Senate">
+<button id="search">Search</button><br><br>
+<table id="members" border="1px" cellpadding="15">
+    <tr>
+        <td>Name</td>
+        <td>ID</td>
+        <td>Title</td>
+        <td>Party</td>
+        <td>State</td>
+        <td>Contact Information</td>
+    </tr>
+</table>
+
+</body>
+</html>
