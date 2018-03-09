@@ -6,8 +6,9 @@ $(document).ready(function(){
             "        <td>Title</td>\n" +
             "        <td>Party</td>\n" +
             "        <td>State</td>\n" +
+            "        <td>Years in office</td>\n"+
             "        <td>Contact Information</td>\n" +
-            "    </tr>"
+            "    </tr>";
         listMembers(document.getElementById("congress").value, document.getElementById("chamber").value);
 
     });
@@ -30,7 +31,7 @@ $(document).ready(function(){
         for (i = 0; i < 99; i++){
             document.getElementById("members").innerHTML += "<tr id='" + i +"'><td>" + result.results[0].members[i].first_name + " " + result.results[0].members[i].last_name + "</td><td>"
             + result.results[0].members[i].id + "</td><td>" + result.results[0].members[i].title + "</td><td>" + result.results[0].members[i].party + "</td><td>"
-                + result.results[0].members[i].state + "</td><td>" + "Phone number: " + result.results[0].members[i].phone + "<br>" + "Twitter: " + result.results[0].members[i].twitter_account + "</td></tr>";
+                + result.results[0].members[i].state + "</td><td>" + result.results[0].members[i].seniority + "</td><td>Phone number: " + result.results[0].members[i].phone + "<br>" + "Twitter: " + result.results[0].members[i].twitter_account + "</td></tr>";
         }
         for (i=0; i<99; i++){
             if (result.results[0].members[i].party === "D"){
