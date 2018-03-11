@@ -1,4 +1,4 @@
-#members{
+#members, #tbl, #tbl2{
     width: 100%;
     border-collapse: collapse;
     border: 1px solid black;
@@ -6,4 +6,42 @@
 
 #congress{
     width: 300px;
+}
+
+
+.ui-menu{
+    width: 200px;
+    font-family: arial, sans-serif;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#header{
+    font-family: 'Alfa Slab One', cursive;
+    text-align: center;
+}
+
+body{
+    font-family: arial, sans-serif;
+
+}
+
+#mainMenu{
+    text-align:center;
+}
+
+button, select, input{
+    background-color: white;
+    margin-right:auto;
+    margin-left:auto;
+    color: black;
+    font-family: arial, sans-serif;
+    text-align: center;
+    height: 30px;
+    width: 150px;
+    font-size: 15px;
+}
+
+button:hover{
+    background-color: lightgray;
 }
