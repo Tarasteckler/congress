@@ -39,12 +39,12 @@
             <div>History</div>
         </li>
     </ul>
-    <hr>
+    <br><hr>
 </div>
 
 
 <div id="memberPage">
-    <h1>Congressional Members</h1>
+    <h2>Congressional Members</h2><hr>
     <h3>
         First, decide between the Senate and the House. The senate is comprised of two senators per state, while the House
         is representative of each states' population.
@@ -59,6 +59,7 @@
 
     <input id="congress" type="text" placeholder="102-115 for House, 80-115 for Senate"><br><br>
     <button id="search">Search</button><br><br>
+    <div id="error" style="color: red"></div>
     <table id="members" border="1px" cellpadding="15">
         <tr>
             <td>Name</td>
@@ -75,7 +76,7 @@
 <div id="senatorsByState">
     <h2>Members by State & District</h2>
     <hr>
-    <h3>Select a state to learn about its senators</h3>
+    <h3>Select a state to learn about its senators:</h3>
     <select id="st">
         <option value="AL">Alabama</option>
         <option value="AK">Alaska</option>
@@ -140,7 +141,7 @@
             </tr>
         </table>
     </div>
-    <h3>Select a state and district to learn about its representatives in the House</h3>
+    <h3>First, select a state to get its number of districts:</h3>
     <select id="st2">
         <option value="AL">Alabama</option>
         <option value="AK">Alaska</option>
@@ -192,6 +193,7 @@
         <option value="WY">Wyoming</option>
     </select><br><br>
     <button id="theState">Get districts</button><br><br>
+    <h3>Next, select which district in this state you want to get the representative in the House for:</h3>
     <select id="district"></select><br><br>
     <button id="state2">Search</button><br><br>
     <div id="repsBySt">

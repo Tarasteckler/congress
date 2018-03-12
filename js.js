@@ -2,16 +2,24 @@ $(document).ready(function(){
     $("#memberPage").hide();
     $("#senatorsByState").hide();
     $("#search").on("click", function(){
-        document.getElementById("members").innerHTML = "<tr>\n" +
-            "        <td>Name</td>\n" +
-            "        <td>ID</td>\n" +
-            "        <td>Title</td>\n" +
-            "        <td>Party</td>\n" +
-            "        <td>State</td>\n" +
-            "        <td>Years in Office</td>\n" +
-            "        <td>Contact Information</td>\n" +
-            "    </tr>";
-        listMembers(document.getElementById("congress").value, document.getElementById("chamber").value);
+        console.log(document.getElementById("congress").value);
+        if (document.getElementById("congress").value === ""){
+            $("#members").hide();
+            document.getElementById("error").innerHTML = "Please enter a valid year of congress.";
+        }else{
+            document.getElementById("error").innerHTML = "";
+            $("#members").show();
+            document.getElementById("members").innerHTML = "<tr>\n" +
+                "        <td>Name</td>\n" +
+                "        <td>ID</td>\n" +
+                "        <td>Title</td>\n" +
+                "        <td>Party</td>\n" +
+                "        <td>State</td>\n" +
+                "        <td>Years in Office</td>\n" +
+                "        <td>Contact Information</td>\n" +
+                "    </tr>";
+            listMembers(document.getElementById("congress").value, document.getElementById("chamber").value);
+        }
     });
 
     $( "#menu" ).menu();
@@ -29,6 +37,10 @@ $(document).ready(function(){
 
     $("#state").on("click", function(){
         senatorsByState(document.getElementById("st").value);
+    });
+
+    $("#state2").on("click", function(){
+       repsByDistrict(document.getElementById("st2").value, document.getElementById("district").value);
     });
 
 
@@ -77,8 +89,8 @@ $(document).ready(function(){
     }
 
 
-    function representativesByState(state){
-        url = "https://api.propublica.org/congress/v1/members/senate/" + state + "/current.json";
+    function repsByDistrict(state, district){
+        url = "https://api.propublica.org/congress/v1/members/house/" + state + "/" + district + "/current.json";
         $.ajax({
             url: url,
             method: 'GET',
@@ -101,12 +113,12 @@ $(document).ready(function(){
             "        <td>Years in Office</td>\n" +
             "        <td>Contact Information</td>\n" +
             "    </tr>";
-        for (i=0; i<result.results.length; i++){
+        for (i = 0; i < result.results.length; i++){
             document.getElementById("tbl").innerHTML += "<tr id='"+ i + "'><td>" + result.results[i].name + "</td><td>"+ result.results[i].id +"</td><td>" +
                 result.results[i].next_election + "</td><td>" + result.results[i].party +"</td><td>" + result.results[i].role + "</td><td>" +
                 result.results[i].seniority + "</td><td>Twitter: " + result.results[i].twitter_id + "</td></tr>";
         }
-        for (i=0; i<result.results.length; i++){
+        for (i = 0; i < result.results.length; i++){
             if (result.results[i].party === "D"){
                 document.getElementById(i).style.backgroundColor = "#40bf40";
             }else if (result.results[i].party === "R"){
@@ -127,12 +139,12 @@ $(document).ready(function(){
             "        <td>Years in Office</td>\n" +
             "        <td>Contact Information</td>\n" +
             "    </tr>";
-        for (i=0; i<result.results.length; i++){
+        for (i = 0; i < result.results.length; i++){
             document.getElementById("tbl2").innerHTML += "<tr id='"+ i + "'><td>" + result.results[i].name + "</td><td>"+ result.results[i].id +"</td><td>" +
                 result.results[i].next_election + "</td><td>" + result.results[i].party +"</td><td>" + result.results[i].role + "</td><td>" +
                 result.results[i].seniority + "</td><td>Twitter: " + result.results[i].twitter_id + "</td></tr>";
         }
-        for (i=0; i<result.results.length; i++){
+        for (i = 0; i < result.results.length; i++){
             if (result.results[i].party === "D"){
                 document.getElementById(i).style.backgroundColor = "#40bf40";
             }else if (result.results[i].party === "R"){
@@ -155,10 +167,102 @@ $(document).ready(function(){
             num = "7";
         }else if(state === "AK"){
             num = "1";
+        }else if(state==="AZ"){
+            num = "9";
+        }else if(state==="AR"){
+            num = "4";
+        }else if(state==="CA"){
+            num = "53";
+        }else if(state==="CO"){
+            num = "7";
+        }else if(state==="CT"){
+            num = "5";
+        }else if(state==="DE"){
+            num = "1";
+        }else if(state==="FL"){
+            num = "27";
+        }else if(state==="GA"){
+            num = "14";
+        }else if(state==="HI"){
+            num = "2";
+        }else if(state==="ID"){
+            num = "2";
+        }else if(state==="IL"){
+            num = "18";
+        }else if(state==="IA"){
+            num = "4";
+        }else if(state==="KS"){
+            num = "4";
+        }else if(state==="KY"){
+            num = "6";
+        }else if(state==="LA"){
+            num = "6";
+        }else if(state==="ME"){
+            num = "2";
+        }else if(state==="MA"){
+            num = "9";
+        }else if(state==="MI"){
+            num = "14";
+        }else if(state==="MN"){
+            num = "8";
+        }else if(state==="MS"){
+            num = "4";
+        }else if(state==="MO"){
+            num = "8";
+        }else if(state==="MT"){
+            num = "1";
+        }else if(state==="NE"){
+            num = "3";
+        }else if(state==="NV"){
+            num = "4";
+        }else if(state==="NH"){
+            num = "2";
+        }else if(state==="NJ"){
+            num = "12";
+        }else if(state==="NM"){
+            num = "3";
+        }else if(state==="NY"){
+            num = "27";
+        }else if(state==="NC"){
+            num = "13";
+        }else if(state==="ND"){
+            num = "1";
+        }else if(state==="OH"){
+            num = "16";
+        }else if(state==="OK"){
+            num = "5";
+        }else if(state==="OR"){
+            num = "5";
+        }else if(state==="PA"){
+            num = "18";
+        }else if(state==="RI"){
+            num = "2";
+        }else if(state==="SC"){
+            num = "7";
+        }else if(state==="SD"){
+            num = "1";
+        }else if(state==="TN"){
+            num = "9";
+        }else if(state==="TX"){
+            num = "36";
+        }else if(state==="UT"){
+            num = "4";
+        }else if(state==="VT"){
+            num = "1";
+        }else if(state==="VA"){
+            num = "11";
+        }else if(state==="WA"){
+            num = "10";
+        }else if(state==="WV"){
+            num = "3";
+        }else if(state==="WI"){
+            num = "8";
+        }else if(state==="WY"){
+            num = "1";
+        }
+        for (i = 0; i < num; i++){
+            document.getElementById("district").innerHTML += "<option value='" + (i+1) + "'>" + (i+1) + "</option>";
         }
     }
-
-
-
 
 });
