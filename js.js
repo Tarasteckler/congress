@@ -47,12 +47,12 @@ $(document).ready(function(){
     }
 
     function display(result){
-        for (i = 0; i < 99; i++){
+        for (i = 0; i < result.results[0].num_results; i++){
             document.getElementById("members").innerHTML += "<tr id='" + i +"'><td>" + result.results[0].members[i].first_name + " " + result.results[0].members[i].last_name + "</td><td>"
             + result.results[0].members[i].id + "</td><td>" + result.results[0].members[i].title + "</td><td>" + result.results[0].members[i].party + "</td><td>"
                 + result.results[0].members[i].state + "</td><td>" + result.results[0].members[i].seniority + "</td><td>" + "Phone number: " + result.results[0].members[i].phone + "<br>" + "Twitter: " + result.results[0].members[i].twitter_account + "</td></tr>";
         }
-        for (i=0; i<99; i++){
+        for (i = 0; i < result.results[0].num_results; i++){
             if (result.results[0].members[i].party === "D"){
                 document.getElementById(i).style.backgroundColor = "#40bf40";
             }else{
@@ -142,4 +142,23 @@ $(document).ready(function(){
             }
         }
     }
+
+
+    $("#theState").on("click", function(){
+        var state = document.getElementById("st2").value;
+        findDistrict(state);
+    });
+
+    function findDistrict(state){
+        var num = "";
+        if (state === "AL"){
+            num = "7";
+        }else if(state === "AK"){
+            num = "1";
+        }
+    }
+
+
+
+
 });
