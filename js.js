@@ -1,6 +1,20 @@
 $(document).ready(function(){
+    //ON LOAD
+    $("#billPage").hide();
     $("#memberPage").hide();
     $("#senatorsByState").hide();
+    $("#learn").hide();
+    $( "#menu" ).menu();
+    $("#learnPage").on("click", function(){
+        $("#billPage").hide();
+        $("#memberPage").hide();
+        $("#senatorsByState").hide();
+        $("#learn").show();
+    });
+
+
+
+    //MEMBERS
     $("#search").on("click", function(){
         console.log(document.getElementById("congress").value);
         if (document.getElementById("congress").value === ""){
@@ -18,19 +32,21 @@ $(document).ready(function(){
                 "        <td>Years in Office</td>\n" +
                 "        <td>Contact Information</td>\n" +
                 "    </tr>";
-            listMembers(document.getElementById("congress").value, document.getElementById("chamber").value);
+            membersApi(document.getElementById("congress").value, document.getElementById("chamber").value);
         }
     });
 
-    $( "#menu" ).menu();
-
     $("#mem").on("click", function(){
+        $("#billPage").hide();
+        $("#learn").hide();
         $("#senatorsByState").hide();
         $("#memberPage").show();
 
     });
 
     $("#byState").on("click", function(){
+        $("#billPage").hide();
+        $("#learn").hide();
         $("#memberPage").hide();
         $("#senatorsByState") .show();
     });
@@ -40,11 +56,10 @@ $(document).ready(function(){
     });
 
     $("#state2").on("click", function(){
-       repsByDistrict(document.getElementById("st2").value, document.getElementById("district").value);
+        repsByDistrict(document.getElementById("st2").value, document.getElementById("district").value);
     });
 
-
-    function listMembers(congress, chamber) {
+    function membersApi(congress, chamber) {
         url = "https://api.propublica.org/congress/v1/"+ congress + "/" + chamber + "/members.json";
         $.ajax({
             url: url,
@@ -52,13 +67,13 @@ $(document).ready(function(){
             headers: {'X-API-Key':'OQThYfNgke0bR1QwkP1iMpV12xynMIyZr3HkBRdZ'}
         }).done(function (result) {
             console.log(result);
-            display(result);
+            displayMembers(result);
         }).fail(function (err) {
             throw err;
         });
     }
 
-    function display(result){
+    function displayMembers(result){
         for (i = 0; i < result.results[0].num_results; i++){
             document.getElementById("members").innerHTML += "<tr id='" + i +"'><td>" + result.results[0].members[i].first_name + " " + result.results[0].members[i].last_name + "</td><td>"
             + result.results[0].members[i].id + "</td><td>" + result.results[0].members[i].title + "</td><td>" + result.results[0].members[i].party + "</td><td>"
@@ -87,7 +102,6 @@ $(document).ready(function(){
             throw err;
         });
     }
-
 
     function repsByDistrict(state, district){
         url = "https://api.propublica.org/congress/v1/members/house/" + state + "/" + district + "/current.json";
@@ -154,7 +168,6 @@ $(document).ready(function(){
             }
         }
     }
-
 
     $("#theState").on("click", function(){
         var state = document.getElementById("st2").value;
@@ -264,5 +277,62 @@ $(document).ready(function(){
             document.getElementById("district").innerHTML += "<option value='" + (i+1) + "'>" + (i+1) + "</option>";
         }
     }
+
+
+    //BILLS
+
+    $("#bills").on("click", function(){
+        $("#memberPage").hide();
+        $("#senatorsByState").hide();
+        $("#learn").hide();
+        $("#billPage").show();
+    });
+
+    $("#billQuerySearch").on("click", function(){
+        billsApi(document.getElementById("billQuery").value);
+    });
+
+    function billsApi(query){
+        url = "https://api.propublica.org/congress/v1/bills/search.json?query=" + query;
+        $.ajax({
+            url: url,
+            method: 'GET',
+            headers: {'X-API-Key':'OQThYfNgke0bR1QwkP1iMpV12xynMIyZr3HkBRdZ'}
+        }).done(function (result) {
+            console.log(result);
+            displayBills(result);
+        }).fail(function (err) {
+            throw err;
+        });
+    }
+
+    function displayBills(result){
+        for(i = 0; i < result.results[0].bills.length; i++){
+            document.getElementById("billInfo").innerHTML += "<tr class='billRow collapsible' id='row" + i + "'><td>" + result.results[0].bills[i].number +"</td><td>" +
+                result.results[0].bills[i].sponsor_title + " " + result.results[0].bills[i].sponsor_name + "</td><td>"+ result.results[0].bills[i].title + "</td><td>"+ result.results[0].bills[i].committees + "</td></tr>";
+            $("#row" + i).on("click", moreBillInfo(i));
+        }
+    }
+
+    function moreBillInfo(i){
+
+    }
+
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+
+    //https://www.w3schools.com/howto/howto_js_collapsible.asp
 
 });

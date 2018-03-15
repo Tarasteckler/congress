@@ -22,7 +22,7 @@
     <h3 style="text-decoration: underline" >MENU</h3>
     <ul id="menu">
         <li>
-            <div>Bills</div>
+            <div id="bills">Bills</div>
         </li>
         <li>
             <div>Members</div>
@@ -36,12 +36,11 @@
             </ul>
         </li>
         <li>
-            <div>History</div>
+            <div id="learnPage">Learn</div>
         </li>
     </ul>
     <br><hr>
 </div>
-
 
 <div id="memberPage">
     <h2>Congressional Members</h2><hr>
@@ -210,6 +209,27 @@
         </table>
     </div>
 </div>
+
+<div id="learn">
+    <h2>How does congress work?</h2><hr>
+</div>
+
+<div id="billPage">
+    <h2>Bills</h2><hr>
+    <h3>20 Most Recent Bills</h3>
+    <input id="billQuery" type="text" value="megahertz">
+    <button id="billQuerySearch">Search</button><br><br>
+    <table id="billInfo" border="1px" cellpadding="15">
+        <tr>
+            <td>Bill Number</td>
+            <td>Sponsor</td>
+            <td>Title</td>
+            <td>Committee</td>
+        </tr>
+    </table>
+    <div class="collContent"></div>
+</div>
+
 
 </body>
 </html>
