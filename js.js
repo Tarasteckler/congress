@@ -4,6 +4,7 @@ $(document).ready(function(){
     $("#memberPage").hide();
     $("#senatorsByState").hide();
     $("#learn").hide();
+    $(".collContent").hide();
     $( "#menu" ).menu();
     $("#learnPage").on("click", function(){
         $("#billPage").hide();
@@ -11,7 +12,6 @@ $(document).ready(function(){
         $("#senatorsByState").hide();
         $("#learn").show();
     });
-
 
 
     //MEMBERS
@@ -308,31 +308,23 @@ $(document).ready(function(){
 
     function displayBills(result){
         for(i = 0; i < result.results[0].bills.length; i++){
-            document.getElementById("billInfo").innerHTML += "<tr class='billRow collapsible' id='row" + i + "'><td>" + result.results[0].bills[i].number +"</td><td>" +
-                result.results[0].bills[i].sponsor_title + " " + result.results[0].bills[i].sponsor_name + "</td><td>"+ result.results[0].bills[i].title + "</td><td>"+ result.results[0].bills[i].committees + "</td></tr>";
-            $("#row" + i).on("click", moreBillInfo(i));
+            document.getElementById("billInfo").innerHTML += "<tr class='billRow collapsible' id='" + i + "'><td>" + result.results[0].bills[i].number +"</td><td>" +
+                result.results[0].bills[i].sponsor_title + " " + result.results[0].bills[i].sponsor_name + "</td><td>"+ result.results[0].bills[i].title + "</td><td>"+
+                result.results[0].bills[i].committees + "</td></tr>";
+
+        //MAKE THIS WORK!!!!!!!!!!!
+            $(".billRow").on("click", function(){
+                var id = this.id;
+                console.log(id);
+                console.log(document.getElementById(id).innerHTML);
+                var table = document.getElementById("billInfo");
+                var row = table.insertRow(id);
+                var cell = row.insertCell(id);
+                cell.innerHTML = result.results[0].bills[id].summary_short;
+                // document.getElementById(id).innerHTML += "<tr><td>" + result.results[0].bills[id].summary_short + "</td></tr>";
+            });
         }
     }
 
-    function moreBillInfo(i){
-
-    }
-
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
-
-    //https://www.w3schools.com/howto/howto_js_collapsible.asp
 
 });
