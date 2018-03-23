@@ -24,13 +24,13 @@ $(document).ready(function(){
             document.getElementById("error").innerHTML = "";
             $("#members").show();
             document.getElementById("members").innerHTML = "<tr>\n" +
-                "        <td>Name</td>\n" +
-                "        <td>ID</td>\n" +
-                "        <td>Title</td>\n" +
-                "        <td>Party</td>\n" +
-                "        <td>State</td>\n" +
-                "        <td>Years in Office</td>\n" +
-                "        <td>Contact Information</td>\n" +
+                "        <th>Name</th>\n" +
+                "        <th>ID</th>\n" +
+                "        <th>Title</th>\n" +
+                "        <th>Party</th>\n" +
+                "        <th>State</th>\n" +
+                "        <th>Years in Office</th>\n" +
+                "        <th>Contact Information</th>\n" +
                 "    </tr>";
             membersApi(document.getElementById("congress").value, document.getElementById("chamber").value);
         }
@@ -119,39 +119,39 @@ $(document).ready(function(){
 
     function senBySt(result){
         document.getElementById("tbl").innerHTML = "<tr>\n" +
-            "        <td>Name</td>\n" +
-            "        <td>ID</td>\n" +
-            "        <td>Next Election</td>\n" +
-            "        <td>Party</td>\n" +
-            "        <td>Role</td>\n" +
-            "        <td>Years in Office</td>\n" +
-            "        <td>Contact Information</td>\n" +
+            "        <th>Name</th>\n" +
+            "        <th>ID</th>\n" +
+            "        <th>Next Election</th>\n" +
+            "        <th>Party</th>\n" +
+            "        <th>Role</th>\n" +
+            "        <th>Years in Office</th>\n" +
+            "        <th>Contact Information</th>\n" +
             "    </tr>";
         for (i = 0; i < result.results.length; i++){
-            document.getElementById("tbl").innerHTML += "<tr id='"+ i + "'><td>" + result.results[i].name + "</td><td>"+ result.results[i].id +"</td><td>" +
+            document.getElementById("tbl").innerHTML += "<tr id='row"+ i + "'><td>" + result.results[i].name + "</td><td>"+ result.results[i].id +"</td><td>" +
                 result.results[i].next_election + "</td><td>" + result.results[i].party +"</td><td>" + result.results[i].role + "</td><td>" +
                 result.results[i].seniority + "</td><td>Twitter: " + result.results[i].twitter_id + "</td></tr>";
         }
         for (i = 0; i < result.results.length; i++){
             if (result.results[i].party === "D"){
-                document.getElementById(i).style.backgroundColor = "#40bf40";
+                document.getElementById("row" + i).style.backgroundColor = "#40bf40";
             }else if (result.results[i].party === "R"){
-                document.getElementById(i).style.backgroundColor = "#ff471a";
+                document.getElementById("row" + i).style.backgroundColor = "#ff471a";
             }else {
-                document.getElementById(i).style.backgroundColor = "yellow";
+                document.getElementById("row" + i).style.backgroundColor = "yellow";
             }
         }
     }
 
     function repsByState(result){
         document.getElementById("tbl2").innerHTML = "<tr>\n" +
-            "        <td>Name</td>\n" +
-            "        <td>ID</td>\n" +
-            "        <td>Next Election</td>\n" +
-            "        <td>Party</td>\n" +
-            "        <td>Role</td>\n" +
-            "        <td>Years in Office</td>\n" +
-            "        <td>Contact Information</td>\n" +
+            "        <th>Name</th>\n" +
+            "        <th>ID</th>\n" +
+            "        <th>Next Election</th>\n" +
+            "        <th>Party</th>\n" +
+            "        <th>Role</th>\n" +
+            "        <th>Years in Office</th>\n" +
+            "        <th>Contact Information</td>\n" +
             "    </tr>";
         for (i = 0; i < result.results.length; i++){
             document.getElementById("tbl2").innerHTML += "<tr id='"+ i + "'><td>" + result.results[i].name + "</td><td>"+ result.results[i].id +"</td><td>" +
@@ -286,15 +286,26 @@ $(document).ready(function(){
         $("#senatorsByState").hide();
         $("#learn").hide();
         $("#billPage").show();
+        $("#billInfo").hide();
+        $("#billInfo2").hide();
     });
 
     $("#billQuerySearch").on("click", function(){
-        billsApi(document.getElementById("billQuery").value);
+        $("#billInfo2").hide();
+        document.getElementById("body").innerHTML = "";
+        billsApi1(document.getElementById("billQuery").value, document.getElementById("sort").value);
     });
 
-    function billsApi(query){
-        url = "https://api.propublica.org/congress/v1/bills/search.json?query=" + query;
-        $.ajax({
+    // $("#specificMemberSearch").on("click", function(){
+    //     $("#billInfo").hide();
+    //     // membersApi("115", "senate");
+    //     document.getElementById("body2").innerHTML = "";
+    //     billsApi2(document.getElementById("specificMember").value, "introduced");
+    // });
+
+    function billsApi1(query, sortBy){
+        url = "https://api.propublica.org/congress/v1/bills/search.json?query=" + query + "&sort=" + sortBy + "&";
+            $.ajax({
             url: url,
             method: 'GET',
             headers: {'X-API-Key':'OQThYfNgke0bR1QwkP1iMpV12xynMIyZr3HkBRdZ'}
@@ -306,25 +317,41 @@ $(document).ready(function(){
         });
     }
 
-    function displayBills(result){
-        for(i = 0; i < result.results[0].bills.length; i++){
-            document.getElementById("billInfo").innerHTML += "<tr class='billRow collapsible' id='" + i + "'><td>" + result.results[0].bills[i].number +"</td><td>" +
-                result.results[0].bills[i].sponsor_title + " " + result.results[0].bills[i].sponsor_name + "</td><td>"+ result.results[0].bills[i].title + "</td><td>"+
-                result.results[0].bills[i].committees + "</td></tr>";
+    // function billsApi2(member, type){
+    //     url = "https://api.propublica.org/congress/v1/members/"+ member +"/bills/"+ type +".json";
+    //     $.ajax({
+    //         url: url,
+    //         method: 'GET',
+    //         headers: {'X-API-Key':'OQThYfNgke0bR1QwkP1iMpV12xynMIyZr3HkBRdZ'}
+    //     }).done(function (result) {
+    //         console.log(result);
+    //         displayBills2(result);
+    //     }).fail(function (err) {
+    //         throw err;
+    //     });
+    // }
 
-        //MAKE THIS WORK!!!!!!!!!!!
-            $(".billRow").on("click", function(){
-                var id = this.id;
-                console.log(id);
-                console.log(document.getElementById(id).innerHTML);
-                var table = document.getElementById("billInfo");
-                var row = table.insertRow(id);
-                var cell = row.insertCell(id);
-                cell.innerHTML = result.results[0].bills[id].summary_short;
-                // document.getElementById(id).innerHTML += "<tr><td>" + result.results[0].bills[id].summary_short + "</td></tr>";
-            });
+    function displayBills(result){
+        $("#billInfo").show();
+        for(i = 0; i < result.results[0].bills.length; i++) {
+            document.getElementById("body").innerHTML += "<tr class='billRow' id='" + i + "'><td>" + result.results[0].bills[i].number + "</td><td>" +
+                result.results[0].bills[i].sponsor_title + " " + result.results[0].bills[i].sponsor_name + "</td><td>" + result.results[0].bills[i].title + "</td><td>" +
+                result.results[0].bills[i].committees + "</td></tr>";
         }
     }
+
+    // function displayBills2(result){
+    //     $("#billInfo2").show();
+    //     for(i = 0; i < result.results[0].bills.length; i++) {
+    //         document.getElementById("body2").innerHTML += "<tr class='billRow' id='" + i + "'><td>" + result.results[0].bills[i].number + "</td><td>" +
+    //             result.results[0].bills[i].sponsor_title + " " + result.results[0].bills[i].sponsor_name + "</td><td>" + result.results[0].bills[i].title + "</td><td>" +
+    //             result.results[0].bills[i].committees + "</td></tr>";
+    //     }
+    // }
+
+
+//LEARN PAGE
+
 
 
 });
