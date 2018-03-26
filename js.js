@@ -13,6 +13,13 @@ $(document).ready(function(){
         $("#learn").show();
     });
 
+    $("#menuText").on("click", function(){
+        $("#billPage").hide();
+        $("#memberPage").hide();
+        $("#senatorsByState").hide();
+        $("#learn").hide();
+        $(".collContent").hide();
+    });
 
     //MEMBERS
     $("#search").on("click", function(){

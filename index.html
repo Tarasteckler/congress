@@ -12,35 +12,38 @@
 </head>
 
 <body>
+<div id="topPart">
+    <div id="vert">
+        <h1 id="header" >
+            <img id="seal" src="img/seal.png" style="display: inline-block"> United States Congress
+        </h1>
+    </div>
 
-<h1 id="header">
-    United States Congress
-</h1>
-<hr>
-
-<div id="mainMenu">
-    <h3 style="text-decoration: underline" >MENU</h3>
-    <ul id="menu">
-        <li>
-            <div id="bills">Bills</div>
-        </li>
-        <li>
-            <div>Members</div>
-            <ul>
-                <li>
-                    <div id="mem">All Members</div>
-                </li>
-                <li>
-                    <div id="byState">Members by State</div>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <div id="learnPage">Learn</div>
-        </li>
-    </ul>
-    <br><hr>
+    <div id="mainMenu">
+        <!--<h3 style="text-decoration: underline" id="menuText">MENU</h3>-->
+        <ul id="menu">
+            <li>
+                <div id="bills">Bills</div>
+            </li>
+            <li>
+                <div>Members</div>
+                <ul>
+                    <li>
+                        <div id="mem">All Members</div>
+                    </li>
+                    <li>
+                        <div id="byState">Members by State</div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div id="learnPage">Learn</div>
+            </li>
+        </ul>
+        <br>
+    </div>
 </div>
+
 
 <div id="memberPage">
     <h2>Congressional Members</h2><hr>
@@ -74,7 +77,6 @@
 
 <div id="senatorsByState">
     <h2>Members by State & District</h2>
-    <hr>
     <h3>Select a state to learn about its senators:</h3>
     <select id="st">
         <option value="AL">Alabama</option>
@@ -211,14 +213,14 @@
 </div>
 
 <div id="learn">
-    <h2>How does congress work?</h2><hr>
+    <h2>How does congress work?</h2>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/FFroMQlKiag?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/tEPd98CbbMk?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/n9defOwVWS8?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
 <div id="billPage">
-    <h2>Bills</h2><hr>
+    <h2>Bills</h2>
     <h3>Bills by Keyword</h3>
     <p>Enter a keyword to get  20 bills relating to that subject:</p>
     <input id="billQuery" type="text" placeholder="ex: health care" value="health care">
@@ -239,18 +241,18 @@
         <tbody id="body"></tbody>
     </table><hr>
 
-    <h3>Bills by a Specific Senator</h3>
-    <p>Enter the name of a senator to learn about bills they have sponsored:</p>
-    <input id="specificMember" type="text" placeholder="ex: Kamala Harris" value="Kamala Harris"><br><br>
-    <button id="specificMemberSearch">Search</button><br><br>
-    <table id="billInfo2" border="1px" cellpadding="15">
-        <tr>
-            <th>Bill Number</th>
-            <th>Summary</th>
-            <th>Committee</th>
-        </tr>
-        <tbody id="body2"></tbody>
-    </table><hr>
+    <!--<h3>Bills by a Specific Senator</h3>-->
+    <!--<p>Enter the name of a senator to learn about bills they have sponsored:</p>-->
+    <!--<input id="specificMember" type="text" placeholder="ex: Kamala Harris" value="Kamala Harris"><br><br>-->
+    <!--<button id="specificMemberSearch">Search</button><br><br>-->
+    <!--<table id="billInfo2" border="1px" cellpadding="15">-->
+        <!--<tr>-->
+            <!--<th>Bill Number</th>-->
+            <!--<th>Summary</th>-->
+            <!--<th>Committee</th>-->
+        <!--</tr>-->
+        <!--<tbody id="body2"></tbody>-->
+    <!--</table><hr>-->
 </div>
 
 
