@@ -13,13 +13,16 @@ $(document).ready(function(){
         $("#learn").show();
     });
 
-    $("#menuText").on("click", function(){
+    $("#home").on("click", function(){
         $("#billPage").hide();
         $("#memberPage").hide();
         $("#senatorsByState").hide();
         $("#learn").hide();
         $(".collContent").hide();
+        $("#billInfo").hide();
+        $("#billInfo2").hide();
     });
+
 
     //MEMBERS
     $("#search").on("click", function(){
@@ -55,7 +58,17 @@ $(document).ready(function(){
         $("#billPage").hide();
         $("#learn").hide();
         $("#memberPage").hide();
-        $("#senatorsByState") .show();
+        // document.getElementById("st").value="--Select a state--";
+        document.getElementById("tbl").innerHTML = "<tr>\n" +
+            "        <th>Name</th>\n" +
+            "        <th>ID</th>\n" +
+            "        <th>Next Election</th>\n" +
+            "        <th>Party</th>\n" +
+            "        <th>Role</th>\n" +
+            "        <th>Years in Office</th>\n" +
+            "        <th>Contact Information</th>\n" +
+            "    </tr>";
+        $("#senatorsByState").show();
     });
 
     $("#state").on("click", function(){
@@ -97,6 +110,7 @@ $(document).ready(function(){
     }
 
     function senatorsByState(state){
+        // $("#tbl").show();
         url = "https://api.propublica.org/congress/v1/members/senate/" + state + "/current.json";
         $.ajax({
             url: url,
